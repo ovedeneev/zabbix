@@ -1,14 +1,19 @@
 Zabbix template for Asterisk IP PBX
 
 
+Installation:
 
 - Put userparameter_asterisk.conf in /etc/zabbix/zabbix_agentd.d/ , restart zabbix agent
 
-- Put asterisk_trunks and asterisk_calls scripts in /etc/zabbix/externalscripts/
+- Put asterisk_trunks and asterisk_calls scripts in /etc/zabbix/externalscripts/ and add execute privileges
 
 - Set up cronjob for asterisk_trunks script like this:
 # crontab -l
 # update Asterisk trunks info for zabbix
 2 * * * * /etc/zabbix/externalscripts/asterisk_trunks
 
-- Import Asterisk.xml template in Zabbix. Adjust values if necessary
+- (Optional) If there're no enough permissions for /var/run/asterisk/asterisk.ctl then add following line in /etc/asterisk/asterisk.conf:
+astctlpermissions = 775
+, and restart Asterisk. Add zabbix user to group asterisk.
+
+- Import Asterisk.xml template in Zabbix. Adjust values if necessary.
