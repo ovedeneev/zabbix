@@ -1,0 +1,21 @@
+#!/bin/sh
+DIR="/etc/zabbix/externalscripts"
+cd $DIR
+
+channels=`asterisk -rx "core show channels verbose" | awk '{print $1}' | grep tru_`
+i=0
+
+echo "{ \"data\":["
+for j in $(cat trunks);
+do
+    if [ "$i" -ne "0" ]; then
+        echo ","
+    fi
+    i=$(expr $i + 1)
+    calls=`grep -c $j <<< "$channels"`
+    echo "{"
+    echo "\"{#TRUNK}\":\"$j\","
+    echo "\"{#CALLS}\":\"$calls\""
+    echo "}"
+done
+echo "]}"
