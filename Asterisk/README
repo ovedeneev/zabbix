@@ -1,0 +1,14 @@
+Zabbix template for Asterisk IP PBX
+
+
+
+- Put userparameter_asterisk.conf in /etc/zabbix/zabbix_agentd.d/ , restart zabbix agent
+
+- Put asterisk_trunks and asterisk_calls scripts in /etc/zabbix/externalscripts/
+
+- Set up cronjob for asterisk_trunks script like this:
+# crontab -l
+# update Asterisk trunks info for zabbix
+2 * * * * /etc/zabbix/externalscripts/asterisk_trunks
+
+- Import Asterisk.xml template in Zabbix. Adjust values if necessary
