@@ -1,0 +1,4 @@
+#!/bin/sh
+DIR="/etc/zabbix/externalscripts"
+cd $DIR
+asterisk -rx'sip show peers'| grep ^tru_|awk '{print $1}'| cut -d'/' -f1 > trunks
