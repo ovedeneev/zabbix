@@ -1,5 +1,6 @@
 Zabbix template for Asterisk IP PBX
 
+Finds out the total number of concurrent channels on trunks. Each thunk's name should start with "tru_"
 
 Installation:
 
